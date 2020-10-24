@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ListItem from './ListItem';
+import MyDiv from './MyDiv';
+import MyInput from './MyInput';
+
 
 function App() {
+  let [items, setItems] = React.useState(["Eggs", "Milk"]);
+
+let onClick = () => {
+  setItems([...items, <MyDiv/>]);
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {items.map(q => <ListItem displayText={q}/>)}
+      <MyInput/>
+      <button onClick={onClick}>LOLOLO</button>
     </div>
   );
 }
 
 export default App;
+
+
+// // ####
+
+// let oldArr = ["A", "B"];
+// let newArr = [];
+
+// for (let item of oldArr) {
+//   newArr.push(item);
+// }
+// newArr.push("Lol");
+
+// // ####
+
+// let oldArr = ["A", "B"];
+// let newArr = [...oldArr, "Lol"];

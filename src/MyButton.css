@@ -1,0 +1,11 @@
+.my-button {
+    border: none;
+}
+
+.my-button-light {
+    background-color: pink;
+}
+
+.my-button-dark {
+    background-color: indigo;
+}
