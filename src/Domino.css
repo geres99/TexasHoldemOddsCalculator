@@ -1,0 +1,10 @@
+.domino {
+  height: 50px;
+  width: 50px;
+}
+.red {
+  background-color: rgb(241, 19, 19);
+}
+.blue {
+  background-color: rgb(76, 0, 253);
+}
