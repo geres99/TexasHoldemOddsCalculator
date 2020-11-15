@@ -1,12 +1,11 @@
 import React from "react";
 import "./App.css";
-import Domino from "./Domino";
+import ButtonRandom from "./ButtonRandom";
+
 function App() {
   return (
     <div>
-      {/* <Domino />
-      <Domino /> */}
-      <Domino />
+      <ButtonRandom />
     </div>
   );
 }
