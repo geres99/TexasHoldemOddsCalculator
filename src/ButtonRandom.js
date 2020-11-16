@@ -39,8 +39,12 @@ function ButtonRandom() {
       newArray = cardsForTable.splice(0, 3);
       setCardsOnTable(newArray);
     } else {
-      newArray = cardsForTable.splice(0, 1);
-      setCardsOnTable([...cardsOnTable, newArray]);
+      if (cardsForTable.length === 0) {
+      } else {
+        console.log(cardsForTable);
+        newArray = cardsForTable.splice(0, 1);
+        setCardsOnTable([...cardsOnTable, newArray]);
+      }
     }
   };
 
@@ -50,34 +54,34 @@ function ButtonRandom() {
     let cardDeck = ["x"];
     for (let c = 2; c < 15; c++) {
       if (c === 11) {
-        cardDeck.push("J h");
-        cardDeck.push("J d");
-        cardDeck.push("J c");
-        cardDeck.push("J s");
+        cardDeck.push("JH");
+        cardDeck.push("JD");
+        cardDeck.push("JC");
+        cardDeck.push("JS");
       }
       if (c === 12) {
-        cardDeck.push("Q h");
-        cardDeck.push("Q d");
-        cardDeck.push("Q c");
-        cardDeck.push("Q s");
+        cardDeck.push("QH");
+        cardDeck.push("QD");
+        cardDeck.push("QC");
+        cardDeck.push("QS");
       }
       if (c === 13) {
-        cardDeck.push("K h");
-        cardDeck.push("K d");
-        cardDeck.push("K c");
-        cardDeck.push("K s");
+        cardDeck.push("KH");
+        cardDeck.push("KD");
+        cardDeck.push("KC");
+        cardDeck.push("KS");
       }
       if (c === 14) {
-        cardDeck.push("A h");
-        cardDeck.push("A d");
-        cardDeck.push("A c");
-        cardDeck.push("A s");
+        cardDeck.push("AH");
+        cardDeck.push("AD");
+        cardDeck.push("AC");
+        cardDeck.push("AS");
       }
       if (c < 11) {
-        cardDeck.push(c + " h");
-        cardDeck.push(c + " d");
-        cardDeck.push(c + " c");
-        cardDeck.push(c + " s");
+        cardDeck.push(c + "H");
+        cardDeck.push(c + "D");
+        cardDeck.push(c + "C");
+        cardDeck.push(c + "S");
       }
     }
     setCardDeckState(cardDeck); // Creating Deck of cards
@@ -110,6 +114,15 @@ function ButtonRandom() {
       }
     }
   };
+  let playersTimer = 0;
+  let dupa = (x) => {
+    if (playersTimer >= 2) {
+      return process.env.PUBLIC_URL + "gray_back" + ".png";
+    } else {
+      playersTimer++;
+      return process.env.PUBLIC_URL + x + ".png";
+    }
+  };
   return (
     <div>
       <button onClick={cardRandomizer}>Start new game</button>
@@ -117,13 +130,21 @@ function ButtonRandom() {
       {cardsForPlayers.map((x) => (
         <div>
           {playersSpots()}
-          <div className={cardDeckState[x]}>{cardDeckState[x]}</div>
+          <img
+            src={dupa(cardDeckState[x])}
+            width="50"
+            alt={cardDeckState[x]}
+          ></img>
         </div>
       ))}
       {cardsOnTable.map((x) => (
         <div>
           {StringOnce()}
-          <div className={cardDeckState[x]}>{cardDeckState[x]}</div>
+          <img
+            src={process.env.PUBLIC_URL + cardDeckState[x] + ".png"}
+            width="50"
+            alt={cardDeckState[x]}
+          ></img>
         </div>
       ))}
       <button onClick={cardAdder}>Add new card to the table</button>
