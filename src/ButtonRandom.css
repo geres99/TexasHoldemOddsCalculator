@@ -1,12 +1,14 @@
-.d {
-  background-color: rgb(226, 212, 13);
+.column {
+  display: flex;
+  flex-direction: column;
+  background-color: steelblue;
 }
-.h {
-  background-color: rgb(230, 17, 34);
+.connectingCards {
+  display: flex;
+  margin-top: -73px;
+  margin-left: 7px;
 }
-.s {
-  background-color: rgb(28, 221, 21);
-}
-.c {
-  background-color: rgb(27, 139, 231);
+.row {
+  display: flex;
+  flex-direction: row;
 }

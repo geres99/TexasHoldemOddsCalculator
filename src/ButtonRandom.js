@@ -7,8 +7,19 @@ function ButtonRandom() {
   let [cardsOnTable, setCardsOnTable] = React.useState([]);
   let [cardsForPlayersShown, setCardsForPlayersShown] = React.useState([]);
   let [inputValue, setInputValue] = React.useState("");
-  let [cardsOnTheTable, setCardsOnTheTable] = React.useState("");
+  let [stringText, setStringText] = React.useState("");
   let [cardDeckState, setCardDeckState] = React.useState([]);
+
+  let DeckCreation = () => {
+    let cardDeck = ["x"];
+    for (let c = 2; c < 15; c++) {
+      cardDeck.push(c + "H");
+      cardDeck.push(c + "D");
+      cardDeck.push(c + "C");
+      cardDeck.push(c + "S");
+    }
+    return cardDeck;
+  };
 
   let playerSpot = 0;
   let playerNumber = 0;
@@ -25,7 +36,7 @@ function ButtonRandom() {
   };
 
   let cardAdder = () => {
-    setCardsOnTheTable("Cards on the table:");
+    setStringText("Cards on the table:");
     let newArray = [];
     if (cardsForTable.length === 5) {
       newArray = cardsForTable.splice(0, 3);
@@ -48,40 +59,7 @@ function ButtonRandom() {
     setCardsForPlayersShown([]);
     setCardsOnTable([]);
     setCardsForTable([]);
-    let cardDeck = ["x"];
-    for (let c = 2; c < 15; c++) {
-      if (c === 11) {
-        cardDeck.push("JH");
-        cardDeck.push("JD");
-        cardDeck.push("JC");
-        cardDeck.push("JS");
-      }
-      if (c === 12) {
-        cardDeck.push("QH");
-        cardDeck.push("QD");
-        cardDeck.push("QC");
-        cardDeck.push("QS");
-      }
-      if (c === 13) {
-        cardDeck.push("KH");
-        cardDeck.push("KD");
-        cardDeck.push("KC");
-        cardDeck.push("KS");
-      }
-      if (c === 14) {
-        cardDeck.push("AH");
-        cardDeck.push("AD");
-        cardDeck.push("AC");
-        cardDeck.push("AS");
-      }
-      if (c < 11) {
-        cardDeck.push(c + "H");
-        cardDeck.push(c + "D");
-        cardDeck.push(c + "C");
-        cardDeck.push(c + "S");
-      }
-    }
-    setCardDeckState(cardDeck); // Creating Deck of cards
+    setCardDeckState(DeckCreation()); // Creating Deck of cards
 
     for (let i = 2; i < 10; i++) {
       if (inputValue === i.toString()) {
@@ -111,49 +89,65 @@ function ButtonRandom() {
       }
     }
   };
+
   let playersTimer = 0;
-  let dupa = (x) => {
+  let cardGiver = (x) => {
     if (playersTimer >= 2) {
-      return process.env.PUBLIC_URL + "gray_back" + ".png";
+      return process.env.PUBLIC_URL + "gray_back.png";
     } else {
       playersTimer++;
       return process.env.PUBLIC_URL + x + ".png";
     }
+  };
+  let connectCardsNum = 0;
+  let connectCards = () => {
+    if (connectCardsNum % 2 === 0) {
+      connectCardsNum++;
+      return;
+    }
+    connectCardsNum++;
+    return "connectingCards";
   };
   return (
     <div>
       <button onClick={cardRandomizer}>Start new game</button>
       2-9 Players <input onChange={onChange} />
       {cardsForPlayers.map((x) => (
-        <div>
+        <div className="column">
           {playersSpots()}
-          <img
-            src={dupa(cardDeckState[x])}
-            width="50"
-            alt={cardDeckState[x]}
-          ></img>
+          <div className={connectCards()}>
+            <img
+              src={cardGiver(cardDeckState[x])}
+              width="50"
+              alt={cardDeckState[x]}
+            ></img>
+          </div>
         </div>
       ))}
       {cardsForPlayersShown.map((x) => (
-        <div>
+        <div className="column">
           {playersSpots()}
-          <img
-            src={process.env.PUBLIC_URL + cardDeckState[x] + ".png"}
-            width="50"
-            alt={cardDeckState[x]}
-          ></img>
+          <div className={connectCards()}>
+            <img
+              src={process.env.PUBLIC_URL + cardDeckState[x] + ".png"}
+              width="50"
+              alt={cardDeckState[x]}
+            ></img>
+          </div>
         </div>
       ))}
-      {cardsOnTheTable}
-      {cardsOnTable.map((x) => (
-        <div>
-          <img
-            src={process.env.PUBLIC_URL + cardDeckState[x] + ".png"}
-            width="50"
-            alt={cardDeckState[x]}
-          ></img>
-        </div>
-      ))}
+      {stringText}
+      <div className="row">
+        {cardsOnTable.map((x) => (
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + cardDeckState[x] + ".png"}
+              width="50"
+              alt={cardDeckState[x]}
+            ></img>
+          </div>
+        ))}
+      </div>
       <button onClick={cardAdder}>Add new card to the table</button>
     </div>
   );
