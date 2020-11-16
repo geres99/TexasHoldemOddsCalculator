@@ -5,7 +5,9 @@ function ButtonRandom() {
   let [cardsForPlayers, setCardsForPlayers] = React.useState([]);
   let [cardsForTable, setCardsForTable] = React.useState([]);
   let [cardsOnTable, setCardsOnTable] = React.useState([]);
+  let [cardsForPlayersShown, setCardsForPlayersShown] = React.useState([]);
   let [inputValue, setInputValue] = React.useState("");
+  let [cardsOnTheTable, setCardsOnTheTable] = React.useState("");
   let [cardDeckState, setCardDeckState] = React.useState([]);
 
   let playerSpot = 0;
@@ -18,22 +20,12 @@ function ButtonRandom() {
     }
   };
 
-  let PutStringOnlyOnce = false;
-  let StringOnce = () => {
-    if (cardsForPlayers.length === 0) {
-      return;
-    }
-    if (PutStringOnlyOnce === false) {
-      PutStringOnlyOnce = true;
-      return "Cards on the table:";
-    }
-  };
-
   let onChange = (e) => {
     setInputValue(e.currentTarget.value);
   };
 
   let cardAdder = () => {
+    setCardsOnTheTable("Cards on the table:");
     let newArray = [];
     if (cardsForTable.length === 5) {
       newArray = cardsForTable.splice(0, 3);
@@ -41,6 +33,10 @@ function ButtonRandom() {
     } else {
       if (cardsForTable.length === 0) {
       } else {
+        if (cardsForTable.length === 1) {
+          setCardsForPlayersShown(cardsForPlayers);
+          setCardsForPlayers([]);
+        }
         console.log(cardsForTable);
         newArray = cardsForTable.splice(0, 1);
         setCardsOnTable([...cardsOnTable, newArray]);
@@ -49,6 +45,7 @@ function ButtonRandom() {
   };
 
   let cardRandomizer = () => {
+    setCardsForPlayersShown([]);
     setCardsOnTable([]);
     setCardsForTable([]);
     let cardDeck = ["x"];
@@ -137,9 +134,19 @@ function ButtonRandom() {
           ></img>
         </div>
       ))}
+      {cardsForPlayersShown.map((x) => (
+        <div>
+          {playersSpots()}
+          <img
+            src={process.env.PUBLIC_URL + cardDeckState[x] + ".png"}
+            width="50"
+            alt={cardDeckState[x]}
+          ></img>
+        </div>
+      ))}
+      {cardsOnTheTable}
       {cardsOnTable.map((x) => (
         <div>
-          {StringOnce()}
           <img
             src={process.env.PUBLIC_URL + cardDeckState[x] + ".png"}
             width="50"
