@@ -56,6 +56,7 @@ function ButtonRandom() {
   };
 
   let cardRandomizer = () => {
+    console.log(cardsForPlayers);
     setCardsForPlayersShown([]);
     setCardsOnTable([]);
     setCardsForTable([]);
@@ -65,10 +66,14 @@ function ButtonRandom() {
       if (inputValue === i.toString()) {
         let array = [];
         let array2 = [];
+        let array3 = [];
         let myMap = new Map();
         for (let v = 0; v < 100000; v++) {
           if (myMap.size >= i * 2 + 5) {
-            setCardsForPlayers(array);
+            for (let p = 0; p < i; p++) {
+              array3.push([array[p * 2], array[p * 2 + 1]]);
+            }
+            setCardsForPlayers(array3);
             setCardsForTable(array2);
             return;
           }
@@ -99,6 +104,7 @@ function ButtonRandom() {
       return process.env.PUBLIC_URL + x + ".png";
     }
   };
+
   let connectCardsNum = 0;
   let connectCards = () => {
     if (connectCardsNum % 2 === 0) {
@@ -108,32 +114,47 @@ function ButtonRandom() {
     connectCardsNum++;
     return "connectingCards";
   };
+
+  let timeUnitNumber = -1;
+  let timingFunction = () => {
+    timeUnitNumber++;
+  };
   return (
     <div>
       <button onClick={cardRandomizer}>Start new game</button>
       2-9 Players <input onChange={onChange} />
       {cardsForPlayers.map((x) => (
-        <div className="column">
-          {playersSpots()}
-          <div className={connectCards()}>
-            <img
-              src={cardGiver(cardDeckState[x])}
-              width="50"
-              alt={cardDeckState[x]}
-            ></img>
-          </div>
+        <div className={"twoCards" + (timeUnitNumber + 1)}>
+          {timingFunction()}
+          {cardsForPlayers[timeUnitNumber].map((y) => (
+            <div className="column">
+              {playersSpots()}
+              <div className={connectCards()}>
+                <img
+                  src={cardGiver(cardDeckState[y])}
+                  width="50"
+                  alt={cardDeckState[y]}
+                ></img>
+              </div>
+            </div>
+          ))}
         </div>
       ))}
       {cardsForPlayersShown.map((x) => (
-        <div className="column">
-          {playersSpots()}
-          <div className={connectCards()}>
-            <img
-              src={process.env.PUBLIC_URL + cardDeckState[x] + ".png"}
-              width="50"
-              alt={cardDeckState[x]}
-            ></img>
-          </div>
+        <div className={"twoCards" + (timeUnitNumber + 1)}>
+          {timingFunction()}
+          {cardsForPlayersShown[timeUnitNumber].map((y) => (
+            <div className="column">
+              {playersSpots()}
+              <div className={connectCards()}>
+                <img
+                  src={process.env.PUBLIC_URL + cardDeckState[y] + ".png"}
+                  width="50"
+                  alt={cardDeckState[y]}
+                ></img>
+              </div>
+            </div>
+          ))}
         </div>
       ))}
       {stringText}
