@@ -31,17 +31,27 @@ function Game() {
   };
 
   let showCards = () => {
-    for (let i = 0; i < otherPlayersHandHidden.length; i++) {
-      console.log(cardsOnTableHidden);
-    }
+    let array = [];
     if (cardsOnTableHidden.length >= 5) {
+      array = cardsOnTableHidden.slice(0, 3);
       setCardsOnTable(cardsOnTableHidden.splice(0, 3));
     } else {
-      setCardsOnTable([...cardsOnTable, cardsOnTableHidden.splice(0, 1)]);
+      array = cardsOnTable.concat(cardsOnTableHidden.slice(0, 1));
+      setCardsOnTable(cardsOnTable.concat(cardsOnTableHidden.splice(0, 1)));
       if (cardsOnTableHidden.length === 0 && otherPlayersHand.length === 0) {
         setOtherPlayersHand(
           otherPlayersHandHidden.splice(0, otherPlayersHandHidden.length)
         );
+      }
+    }
+    let check = new WinCheck();
+    if (otherPlayersHandHidden.length !== 0) {
+      for (let i = 0; i < otherPlayersHandHidden.length; i++) {
+        console.log(check.CheckWin(otherPlayersHandHidden[i], array));
+      }
+    } else {
+      for (let i = 0; i < otherPlayersHand.length; i++) {
+        console.log(check.CheckWin(otherPlayersHand[i], array));
       }
     }
   };

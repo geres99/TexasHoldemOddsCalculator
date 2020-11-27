@@ -3,7 +3,6 @@ export class WinCheck {
     let ColorCheck = (x, y) => {
       let colorPoints = y;
       for (let i = 0; i < Table.length; i++) {
-        console.log(Table);
         if (Hand[1][0][x] === Table[i][1] || Hand[1][0][x] === Table[i][2]) {
           colorPoints++;
         }
