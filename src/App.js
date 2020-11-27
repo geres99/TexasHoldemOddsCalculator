@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import ButtonRandom from "./ButtonRandom";
+import Game from "./Game";
 
 function App() {
   return (
     <div>
-      <ButtonRandom />
+      <Game />
     </div>
   );
 }
