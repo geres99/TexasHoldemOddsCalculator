@@ -49,13 +49,13 @@ function Game() {
     //check.PointsCheck(cardsSorted);
     console.log(
       check.PointsCheck([
+        ["14", "C"],
         ["13", "H"],
-        ["11", "D"],
-        ["10", "D"],
-        ["08", "D"],
-        ["07", "D"],
-        ["05", "D"],
-        ["04", "H"],
+        ["12", "D"],
+        ["10", "S"],
+        ["09", "H"],
+        ["07", "S"],
+        ["04", "D"],
       ])
     );
   };

@@ -27,11 +27,29 @@ export class WinCheck {
     if (game.straightFlushCheck(Cards) !== undefined) {
       return game.straightFlushCheck(Cards);
     }
-    if (game.colorCheck(Cards) !== undefined) {
-      return game.ColorCheck(Cards);
+    if (game.fourOfAKindCheck(Cards) !== undefined) {
+      return game.fourOfAKindCheck(Cards);
     }
-    if (game.stritCheck(Cards) !== undefined) {
-      return game.stritCheck(Cards);
+    if (game.fullHouseCheck(Cards) !== undefined) {
+      return game.fullHouseCheck(Cards);
+    }
+    if (game.colorCheck(Cards) !== undefined) {
+      return game.colorCheck(Cards);
+    }
+    if (game.straightCheck(Cards) !== undefined) {
+      return game.straightCheck(Cards);
+    }
+    if (game.threeOfAKindCheck(Cards) !== undefined) {
+      return game.threeOfAKindCheck(Cards);
+    }
+    if (game.twoPairCheck(Cards) !== undefined) {
+      return game.twoPairCheck(Cards);
+    }
+    if (game.pairCheck(Cards) !== undefined) {
+      return game.pairCheck(Cards);
+    }
+    if (game.strongestCardCheck(Cards) !== undefined) {
+      return game.strongestCardCheck(Cards);
     }
   };
 }
