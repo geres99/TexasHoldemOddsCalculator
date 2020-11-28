@@ -44,18 +44,30 @@ function Game() {
         );
       }
     }
+    // if (otherPlayersHand.length !== 0) {
+    //   let points = [];
+    //   let check = new WinCheck();
+    //   let cardsSorted = check.SortCards(playerHand[0], array);
+    //   points.push(check.PointsCheck(cardsSorted));
+    //   for (let i = 0; i < otherPlayersHand.length; i++) {
+    //     let otherPlayersCardsSorted = check.SortCards(
+    //       otherPlayersHand[i],
+    //       array
+    //     );
+    //     points.push(check.PointsCheck(otherPlayersCardsSorted));
+    //   }
+    //   console.log(points);
+    // }
     let check = new WinCheck();
-    let cardsSorted = check.SortCards(playerHand[0], array);
-    //check.PointsCheck(cardsSorted);
     console.log(
       check.PointsCheck([
-        ["14", "C"],
-        ["13", "H"],
-        ["12", "D"],
-        ["10", "S"],
-        ["09", "H"],
-        ["07", "S"],
-        ["04", "D"],
+        ["11", "D"],
+        ["09", "S"],
+        ["08", "D"],
+        ["08", "C"],
+        ["08", "H"],
+        ["06", "H"],
+        ["03", "C"],
       ])
     );
   };

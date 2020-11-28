@@ -17,7 +17,7 @@ export class CombinationCheck {
         myString += straightFlushFunction(i, v, cards);
       }
       if (myString.length >= 10) {
-        return "poker" + myString;
+        return Number("9" + myString);
       }
     }
   };
@@ -39,7 +39,7 @@ export class CombinationCheck {
       }
       if (myString.length >= 8) {
         myString += theStrongetCard(cards[i][0], cards);
-        return "fourOfAKind" + myString;
+        return Number("8" + myString);
       }
     }
   };
@@ -55,7 +55,7 @@ export class CombinationCheck {
             }
           }
         }
-        if (myString >= 4) {
+        if (myString.length >= 4) {
           return myString;
         }
       }
@@ -70,7 +70,7 @@ export class CombinationCheck {
       if (myString.length >= 6) {
         let pair = pairCheck(cards, cards[i][0]);
         if (pair !== undefined) {
-          return "fullhouse" + myString + pair;
+          return Number("7" + myString + pair);
         }
       }
     }
@@ -86,7 +86,7 @@ export class CombinationCheck {
           }
         }
         if (myString.length >= 10) {
-          return "color" + myString;
+          return Number("6" + myString);
         }
       }
     }
@@ -107,7 +107,7 @@ export class CombinationCheck {
         myString += straightFunction(i, v, cards);
       }
       if (myString.length >= 10) {
-        return "straight" + myString;
+        return Number("5" + myString);
       }
     }
   };
@@ -138,7 +138,7 @@ export class CombinationCheck {
           strongestCard
         );
         myString += strongestCard + secoundStrongestCard;
-        return "threeOfAKind" + myString;
+        return Number("4" + myString);
       }
     }
   };
@@ -186,7 +186,7 @@ export class CombinationCheck {
             cards[i][0],
             pair[0] + pair[1]
           );
-          return "twopair" + myString + pair + strongestCard;
+          return Number("3" + myString + pair + strongestCard);
         }
       }
     }
@@ -230,7 +230,7 @@ export class CombinationCheck {
           secoundStrongestCard
         );
         myString += strongestCard + secoundStrongestCard + thirdStrongestCard;
-        return "pair" + myString;
+        return Number("2" + myString);
       }
     }
   };
@@ -240,6 +240,6 @@ export class CombinationCheck {
     for (let i = 0; i < 5; i++) {
       myString += cards[i][0];
     }
-    return myString;
+    return Number("1" + myString);
   };
 }
