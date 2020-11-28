@@ -45,15 +45,19 @@ function Game() {
       }
     }
     let check = new WinCheck();
-    if (otherPlayersHandHidden.length !== 0) {
-      for (let i = 0; i < otherPlayersHandHidden.length; i++) {
-        console.log(check.CheckWin(otherPlayersHandHidden[i], array));
-      }
-    } else {
-      for (let i = 0; i < otherPlayersHand.length; i++) {
-        console.log(check.CheckWin(otherPlayersHand[i], array));
-      }
-    }
+    let cardsSorted = check.SortCards(playerHand[0], array);
+    //check.PointsCheck(cardsSorted);
+    console.log(
+      check.PointsCheck([
+        ["13", "H"],
+        ["11", "D"],
+        ["10", "D"],
+        ["08", "D"],
+        ["07", "D"],
+        ["05", "D"],
+        ["04", "H"],
+      ])
+    );
   };
   return (
     <div>
