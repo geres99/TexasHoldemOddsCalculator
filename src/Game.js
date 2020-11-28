@@ -44,32 +44,53 @@ function Game() {
         );
       }
     }
-    // if (otherPlayersHand.length !== 0) {
-    //   let points = [];
-    //   let check = new WinCheck();
-    //   let cardsSorted = check.SortCards(playerHand[0], array);
-    //   points.push(check.PointsCheck(cardsSorted));
-    //   for (let i = 0; i < otherPlayersHand.length; i++) {
-    //     let otherPlayersCardsSorted = check.SortCards(
-    //       otherPlayersHand[i],
-    //       array
-    //     );
-    //     points.push(check.PointsCheck(otherPlayersCardsSorted));
-    //   }
-    //   console.log(points);
-    // }
-    let check = new WinCheck();
-    console.log(
-      check.PointsCheck([
-        ["11", "D"],
-        ["09", "S"],
-        ["08", "D"],
-        ["08", "C"],
-        ["08", "H"],
-        ["06", "H"],
-        ["03", "C"],
-      ])
-    );
+    if (otherPlayersHand.length !== 0) {
+      let points = [];
+      let check = new WinCheck();
+      let cardsSorted = check.SortCards(playerHand[0], array);
+      points.push(check.PointsCheck(cardsSorted));
+      for (let i = 0; i < otherPlayersHand.length; i++) {
+        let otherPlayersCardsSorted = check.SortCards(
+          otherPlayersHand[i],
+          array
+        );
+        points.push(check.PointsCheck(otherPlayersCardsSorted));
+      }
+      let strongestHand = 0;
+      let winner = undefined;
+      let draw = [];
+      for (let i = 0; i < points.length; i++) {
+        if (points[i] > strongestHand) {
+          strongestHand = points[i];
+          winner = i;
+        }
+      }
+      draw.push(winner);
+      for (let i = 0; i < points.length; i++) {
+        if (points[winner] === points[i] && winner !== i) {
+          draw.push(i);
+        }
+      }
+      if (draw.length >= 2) {
+        console.log("Its a draw between Players: " + draw);
+      } else {
+        console.log("Player " + (winner + 1) + " is a winner!");
+        console.log(points);
+      }
+    }
+
+    // let check = new WinCheck();
+    // console.log(
+    //   check.PointsCheck([
+    //     ["11", "D"],
+    //     ["09", "S"],
+    //     ["08", "D"],
+    //     ["08", "C"],
+    //     ["08", "H"],
+    //     ["06", "H"],
+    //     ["03", "C"],
+    //   ])
+    // );
   };
   return (
     <div>
