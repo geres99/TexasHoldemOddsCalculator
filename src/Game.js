@@ -45,23 +45,25 @@ function Game() {
   };
 
   let nextRound = () => {
-    let NumberOfPlayers = Math.ceil(Number(inputValue));
-    if (NumberOfPlayers >= 2 && NumberOfPlayers <= 9) {
-      let newGameCards = new DeckShuffle();
-      let cardsForGame = newGameCards.DeckShuffle(NumberOfPlayers);
-      setCardsOnTableHidden(cardsForGame[0]);
-      setOtherPlayersHandHidden(cardsForGame[1]);
-      setPlayerHand([cardsForGame[2]]);
-      setCardsOnTable([]);
-      setOtherPlayersHand([]);
-      let array = tokensOfPlayers;
-      let pot = 0;
-      for (let i = 0; i < array.length; i++) {
-        array[i] = array[i] - 100;
-        pot += 100;
+    if (tokensOnBoard === 0) {
+      let NumberOfPlayers = otherPlayersHand.length + 1;
+      if (NumberOfPlayers >= 2 && NumberOfPlayers <= 9) {
+        let newGameCards = new DeckShuffle();
+        let cardsForGame = newGameCards.DeckShuffle(NumberOfPlayers);
+        setCardsOnTableHidden(cardsForGame[0]);
+        setOtherPlayersHandHidden(cardsForGame[1]);
+        setPlayerHand([cardsForGame[2]]);
+        setCardsOnTable([]);
+        setOtherPlayersHand([]);
+        let array = tokensOfPlayers;
+        let pot = 0;
+        for (let i = 0; i < array.length; i++) {
+          array[i] = array[i] - 100;
+          pot += 100;
+        }
+        setTokensOfPlayers(array);
+        setTokensOnBoard(pot);
       }
-      setTokensOfPlayers(array);
-      setTokensOnBoard(pot);
     }
   };
 
