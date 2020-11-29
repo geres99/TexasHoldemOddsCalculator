@@ -4,6 +4,7 @@ import { DeckShuffle } from "./logic/DeckShuffle";
 import Player from "./Player";
 import Card from "./Card";
 import { WinCheck } from "./logic/WinCheck";
+import { Winners } from "./logic/Winners";
 
 function Game() {
   let [inputValue, setInputValue] = React.useState("");
@@ -44,6 +45,46 @@ function Game() {
         );
       }
     }
+
+    // let check = new WinCheck();
+    // let points = [];
+    // points.push(
+    //   check.PointsCheck([
+    //     ["11", "D"],
+    //     ["09", "S"],
+    //     ["08", "D"],
+    //     ["08", "C"],
+    //     ["08", "H"],
+    //     ["06", "H"],
+    //     ["03", "C"],
+    //   ])
+    // );
+    // points.push(
+    //   check.PointsCheck([
+    //     ["11", "D"],
+    //     ["09", "S"],
+    //     ["08", "D"],
+    //     ["08", "C"],
+    //     ["08", "H"],
+    //     ["06", "H"],
+    //     ["03", "C"],
+    //   ])
+    // );
+    // points.push(
+    //   check.PointsCheck([
+    //     ["11", "D"],
+    //     ["09", "S"],
+    //     ["08", "D"],
+    //     ["08", "C"],
+    //     ["08", "H"],
+    //     ["06", "H"],
+    //     ["03", "C"],
+    //   ])
+    // );
+
+    // let winners = new Winners();
+    // console.log(winners.getWinners(points));
+
     if (otherPlayersHand.length !== 0) {
       let points = [];
       let check = new WinCheck();
@@ -56,41 +97,9 @@ function Game() {
         );
         points.push(check.PointsCheck(otherPlayersCardsSorted));
       }
-      let strongestHand = 0;
-      let winner = undefined;
-      let draw = [];
-      for (let i = 0; i < points.length; i++) {
-        if (points[i] > strongestHand) {
-          strongestHand = points[i];
-          winner = i;
-        }
-      }
-      draw.push(winner);
-      for (let i = 0; i < points.length; i++) {
-        if (points[winner] === points[i] && winner !== i) {
-          draw.push(i);
-        }
-      }
-      if (draw.length >= 2) {
-        console.log("Its a draw between Players: " + draw);
-      } else {
-        console.log("Player " + (winner + 1) + " is a winner!");
-        console.log(points);
-      }
+      let winners = new Winners();
+      console.log(winners.getWinners(points));
     }
-
-    // let check = new WinCheck();
-    // console.log(
-    //   check.PointsCheck([
-    //     ["11", "D"],
-    //     ["09", "S"],
-    //     ["08", "D"],
-    //     ["08", "C"],
-    //     ["08", "H"],
-    //     ["06", "H"],
-    //     ["03", "C"],
-    //   ])
-    // );
   };
   return (
     <div>
