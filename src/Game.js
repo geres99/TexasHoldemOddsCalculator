@@ -32,7 +32,7 @@ function Game() {
       setOtherPlayersHand([]);
       let array = [];
       for (let i = 0; i < NumberOfPlayers; i++) {
-        array.push(1000);
+        array.push(100);
       }
       let pot = 0;
       for (let i = 0; i < array.length; i++) {
@@ -51,16 +51,48 @@ function Game() {
         let newGameCards = new DeckShuffle();
         let cardsForGame = newGameCards.DeckShuffle(NumberOfPlayers);
         setCardsOnTableHidden(cardsForGame[0]);
-        setOtherPlayersHandHidden(cardsForGame[1]);
         setPlayerHand([cardsForGame[2]]);
         setCardsOnTable([]);
         setOtherPlayersHand([]);
         let array = tokensOfPlayers;
         let pot = 0;
         for (let i = 0; i < array.length; i++) {
-          array[i] = array[i] - 100;
-          pot += 100;
+          if (array[i] === 0) {
+            if (i === 0) {
+              setInputValue("");
+              setPlayerHand([]);
+              setOtherPlayersHandHidden([]);
+              setOtherPlayersHand([]);
+              setCardsOnTableHidden([]);
+              setCardsOnTable([]);
+              setTokensOfPlayers([]);
+              setTokensOnBoard();
+              alert("GAME OVER");
+              return;
+            }
+            array[i] = "Deleted";
+            array = array.filter((x) => x !== "Deleted");
+            console.log(array, cardsForGame[1]);
+            cardsForGame[1] = [];
+            // cardsForGame = cardsForGame.filter((x) => x[1] !== "Deleted");
+          } else {
+            array[i] = array[i] - 100;
+            pot += 100;
+          }
         }
+        if (array.length === 1) {
+          setInputValue("");
+          setPlayerHand([]);
+          setOtherPlayersHandHidden([]);
+          setOtherPlayersHand([]);
+          setCardsOnTableHidden([]);
+          setCardsOnTable([]);
+          setTokensOfPlayers([]);
+          setTokensOnBoard();
+          alert("You won!");
+          return;
+        }
+        setOtherPlayersHandHidden(cardsForGame[1]);
         setTokensOfPlayers(array);
         setTokensOnBoard(pot);
       }
@@ -108,7 +140,7 @@ function Game() {
   };
   return (
     <div>
-      <input onChange={onChange} />
+      <input onChange={onChange} value={inputValue} />
       <button onClick={startGame}>Start New Game</button>
       <button onClick={showCards}>Show Cards</button>
       <button onClick={nextRound}>Next Round</button>
