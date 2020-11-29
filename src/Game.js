@@ -13,6 +13,8 @@ function Game() {
   let [otherPlayersHand, setOtherPlayersHand] = React.useState([]);
   let [cardsOnTableHidden, setCardsOnTableHidden] = React.useState([]);
   let [cardsOnTable, setCardsOnTable] = React.useState([]);
+  let [tokensOfPlayers, setTokensOfPlayers] = React.useState([]);
+  let [tokensOnBoard, setTokensOnBoard] = React.useState();
 
   let onChange = (e) => {
     setInputValue(e.target.value);
@@ -28,6 +30,38 @@ function Game() {
       setPlayerHand([cardsForGame[2]]);
       setCardsOnTable([]);
       setOtherPlayersHand([]);
+      let array = [];
+      for (let i = 0; i < NumberOfPlayers; i++) {
+        array.push(1000);
+      }
+      let pot = 0;
+      for (let i = 0; i < array.length; i++) {
+        array[i] = array[i] - 100;
+        pot += 100;
+      }
+      setTokensOfPlayers(array);
+      setTokensOnBoard(pot);
+    }
+  };
+
+  let nextRound = () => {
+    let NumberOfPlayers = Math.ceil(Number(inputValue));
+    if (NumberOfPlayers >= 2 && NumberOfPlayers <= 9) {
+      let newGameCards = new DeckShuffle();
+      let cardsForGame = newGameCards.DeckShuffle(NumberOfPlayers);
+      setCardsOnTableHidden(cardsForGame[0]);
+      setOtherPlayersHandHidden(cardsForGame[1]);
+      setPlayerHand([cardsForGame[2]]);
+      setCardsOnTable([]);
+      setOtherPlayersHand([]);
+      let array = tokensOfPlayers;
+      let pot = 0;
+      for (let i = 0; i < array.length; i++) {
+        array[i] = array[i] - 100;
+        pot += 100;
+      }
+      setTokensOfPlayers(array);
+      setTokensOnBoard(pot);
     }
   };
 
@@ -46,45 +80,6 @@ function Game() {
       }
     }
 
-    // let check = new WinCheck();
-    // let points = [];
-    // points.push(
-    //   check.PointsCheck([
-    //     ["11", "D"],
-    //     ["09", "S"],
-    //     ["08", "D"],
-    //     ["08", "C"],
-    //     ["08", "H"],
-    //     ["06", "H"],
-    //     ["03", "C"],
-    //   ])
-    // );
-    // points.push(
-    //   check.PointsCheck([
-    //     ["11", "D"],
-    //     ["09", "S"],
-    //     ["08", "D"],
-    //     ["08", "C"],
-    //     ["08", "H"],
-    //     ["06", "H"],
-    //     ["03", "C"],
-    //   ])
-    // );
-    // points.push(
-    //   check.PointsCheck([
-    //     ["11", "D"],
-    //     ["09", "S"],
-    //     ["08", "D"],
-    //     ["08", "C"],
-    //     ["08", "H"],
-    //     ["06", "H"],
-    //     ["03", "C"],
-    //   ])
-    // );
-
-    // let winners = new Winners();
-    // console.log(winners.getWinners(points));
-
     if (otherPlayersHand.length !== 0) {
       let points = [];
       let check = new WinCheck();
@@ -98,7 +93,15 @@ function Game() {
         points.push(check.PointsCheck(otherPlayersCardsSorted));
       }
       let winners = new Winners();
-      console.log(winners.getWinners(points));
+      let potSplit = winners.getWinners(points);
+      let tokensForWinners = tokensOfPlayers;
+      for (let i = 0; i < potSplit.length; i++) {
+        console.log(tokensOnBoard);
+        tokensForWinners[potSplit[i]] =
+          tokensForWinners[potSplit[i]] + tokensOnBoard / potSplit.length;
+      }
+      setTokensOfPlayers(tokensForWinners);
+      setTokensOnBoard(0);
     }
   };
   return (
@@ -106,15 +109,21 @@ function Game() {
       <input onChange={onChange} />
       <button onClick={startGame}>Start New Game</button>
       <button onClick={showCards}>Show Cards</button>
+      <button onClick={nextRound}>Next Round</button>
+      {tokensOnBoard}
       {playerHand.map((x) => (
-        <Player spot={x[0]} cards={x[1]} />
+        <Player spot={x[0]} cards={x[1]} tokens={tokensOfPlayers[x[0] - 1]} />
       ))}
       {otherPlayersHand.map((x) => (
-        <Player spot={x[0]} cards={x[1]} />
+        <Player spot={x[0]} cards={x[1]} tokens={tokensOfPlayers[x[0] - 1]} />
       ))}
       <div>
         {otherPlayersHandHidden.map((x) => (
-          <Player spot={x[0]} cards={["gray_back", "gray_back"]} />
+          <Player
+            spot={x[0]}
+            cards={["gray_back", "gray_back"]}
+            tokens={tokensOfPlayers[x[0] - 1]}
+          />
         ))}
         {cardsOnTable.map((x) => (
           <Card card={x} />

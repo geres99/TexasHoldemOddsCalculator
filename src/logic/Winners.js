@@ -18,6 +18,6 @@ export class Winners {
     if (draw.length >= 2) {
       return draw;
     }
-    return winner;
+    return [winner];
   };
 }
