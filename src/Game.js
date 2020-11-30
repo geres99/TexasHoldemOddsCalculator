@@ -32,7 +32,7 @@ function Game() {
       setOtherPlayersHand([]);
       let array = [];
       for (let i = 0; i < NumberOfPlayers; i++) {
-        array.push(100);
+        array.push(300);
       }
       let pot = 0;
       for (let i = 0; i < array.length; i++) {
@@ -57,6 +57,7 @@ function Game() {
         let array = tokensOfPlayers;
         let pot = 0;
         for (let i = 0; i < array.length; i++) {
+          console.log(i);
           if (array[i] === 0) {
             if (i === 0) {
               setInputValue("");
@@ -70,11 +71,9 @@ function Game() {
               alert("GAME OVER");
               return;
             }
-            array[i] = "Deleted";
-            array = array.filter((x) => x !== "Deleted");
-            console.log(array, cardsForGame[1]);
-            cardsForGame[1] = [];
-            // cardsForGame = cardsForGame.filter((x) => x[1] !== "Deleted");
+            cardsForGame[1][i - 1] = "Deleted";
+            cardsForGame[1] = cardsForGame[1].filter((x) => x !== "Deleted");
+            console.log(cardsForGame[1], array);
           } else {
             array[i] = array[i] - 100;
             pot += 100;
@@ -151,14 +150,14 @@ function Game() {
       {otherPlayersHand.map((x) => (
         <Player spot={x[0]} cards={x[1]} tokens={tokensOfPlayers[x[0] - 1]} />
       ))}
+      {otherPlayersHandHidden.map((x) => (
+        <Player
+          spot={x[0]}
+          cards={["gray_back", "gray_back"]}
+          tokens={tokensOfPlayers[x[0] - 1]}
+        />
+      ))}
       <div>
-        {otherPlayersHandHidden.map((x) => (
-          <Player
-            spot={x[0]}
-            cards={["gray_back", "gray_back"]}
-            tokens={tokensOfPlayers[x[0] - 1]}
-          />
-        ))}
         {cardsOnTable.map((x) => (
           <Card card={x} />
         ))}
