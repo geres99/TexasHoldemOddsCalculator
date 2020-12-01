@@ -8,6 +8,7 @@ import { Winners } from "./logic/Winners";
 
 function Game() {
   let [inputValue, setInputValue] = React.useState("");
+  let [sliderValue, setSliderValue] = React.useState(50);
   let [playerHand, setPlayerHand] = React.useState([]);
   let [otherPlayersHandHidden, setOtherPlayersHandHidden] = React.useState([]);
   let [otherPlayersHand, setOtherPlayersHand] = React.useState([]);
@@ -18,6 +19,17 @@ function Game() {
 
   let onChange = (e) => {
     setInputValue(e.target.value);
+  };
+
+  let onChangeSlider = (e) => {
+    setSliderValue(e.target.value);
+  };
+
+  let minBet = () => {};
+
+  let maxBet = () => {
+    console.log(tokensOfPlayers[0]);
+    return tokensOfPlayers[0];
   };
 
   let startGame = () => {
@@ -99,6 +111,20 @@ function Game() {
   };
 
   let showCards = () => {
+    tokensOfPlayers[0] = tokensOfPlayers[0] - Number(sliderValue);
+    setTokensOnBoard(tokensOnBoard + Number(sliderValue));
+    let minValue = Number(sliderValue);
+    for (let i = 1; i < tokensOfPlayers; i++) {
+      if (tokensOfPlayers[i] <= minValue) {
+        setTokensOnBoard(tokensOnBoard + tokensOfPlayers[i]);
+        tokensOfPlayers[i] = 0;
+      }
+      if (tokensOfPlayers[i] > minValue) {
+        setTokensOnBoard(tokensOnBoard + minValue);
+        tokensOfPlayers[i] = tokensOfPlayers[i] - minValue;
+      }
+    }
+    setTokensOfPlayers(tokensOfPlayers);
     let array = [];
     if (cardsOnTableHidden.length >= 5) {
       array = cardsOnTableHidden.slice(0, 3);
@@ -145,7 +171,16 @@ function Game() {
       <button onClick={nextRound}>Next Round</button>
       {tokensOnBoard}
       {playerHand.map((x) => (
-        <Player spot={x[0]} cards={x[1]} tokens={tokensOfPlayers[x[0] - 1]} />
+        <div>
+          <input
+            type="range"
+            min="1"
+            max={maxBet()}
+            onChange={onChangeSlider}
+          />
+          {sliderValue}
+          <Player spot={x[0]} cards={x[1]} tokens={tokensOfPlayers[x[0] - 1]} />
+        </div>
       ))}
       {otherPlayersHand.map((x) => (
         <Player spot={x[0]} cards={x[1]} tokens={tokensOfPlayers[x[0] - 1]} />
