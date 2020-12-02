@@ -5,9 +5,12 @@ import Player from "./Player";
 import Card from "./Card";
 import { WinCheck } from "./logic/WinCheck";
 import { Winners } from "./logic/Winners";
+import { BetingSystemPlayer } from "./logic/BetingSystemPlayer";
 
 function Game() {
   let [inputValue, setInputValue] = React.useState("");
+  let [blind, setBlind] = React.useState(10);
+  let [minBetting, setMinBetting] = React.useState(0);
   let [sliderValue, setSliderValue] = React.useState(50);
   let [playerHand, setPlayerHand] = React.useState([]);
   let [otherPlayersHandHidden, setOtherPlayersHandHidden] = React.useState([]);
@@ -16,6 +19,7 @@ function Game() {
   let [cardsOnTable, setCardsOnTable] = React.useState([]);
   let [tokensOfPlayers, setTokensOfPlayers] = React.useState([]);
   let [tokensOnBoard, setTokensOnBoard] = React.useState();
+  let [tokensSpend, setTokensSpend] = React.useState([]);
 
   let onChange = (e) => {
     setInputValue(e.target.value);
@@ -25,7 +29,12 @@ function Game() {
     setSliderValue(e.target.value);
   };
 
-  let minBet = () => {};
+  let minBet = () => {
+    if (tokensOfPlayers[0] >= blind) {
+      return blind;
+    }
+    return tokensOfPlayers[0];
+  };
 
   let maxBet = () => {
     console.log(tokensOfPlayers[0]);
@@ -43,8 +52,10 @@ function Game() {
       setCardsOnTable([]);
       setOtherPlayersHand([]);
       let array = [];
+      let array2 = [];
       for (let i = 0; i < NumberOfPlayers; i++) {
         array.push(300);
+        array2.push(0);
       }
       let pot = 0;
       for (let i = 0; i < array.length; i++) {
@@ -52,6 +63,7 @@ function Game() {
         pot += 100;
       }
       setTokensOfPlayers(array);
+      setTokensSpend(array2);
       setTokensOnBoard(pot);
     }
   };
@@ -111,20 +123,23 @@ function Game() {
   };
 
   let showCards = () => {
-    tokensOfPlayers[0] = tokensOfPlayers[0] - Number(sliderValue);
-    setTokensOnBoard(tokensOnBoard + Number(sliderValue));
-    let minValue = Number(sliderValue);
-    for (let i = 1; i < tokensOfPlayers; i++) {
-      if (tokensOfPlayers[i] <= minValue) {
-        setTokensOnBoard(tokensOnBoard + tokensOfPlayers[i]);
-        tokensOfPlayers[i] = 0;
-      }
-      if (tokensOfPlayers[i] > minValue) {
-        setTokensOnBoard(tokensOnBoard + minValue);
-        tokensOfPlayers[i] = tokensOfPlayers[i] - minValue;
-      }
-    }
+    console.log(tokensSpend);
+    let firstMove = BetingSystemPlayer(
+      tokensOnBoard,
+      tokensOfPlayers[0],
+      tokensSpend[0],
+      minBetting,
+      blind,
+      sliderValue
+    );
+    console.log(firstMove);
+    setTokensOnBoard(firstMove[0]);
+    tokensOfPlayers[0] = firstMove[1];
     setTokensOfPlayers(tokensOfPlayers);
+    tokensSpend[0] = firstMove[2];
+    setTokensSpend(tokensSpend);
+    setMinBetting(minBetting);
+
     let array = [];
     if (cardsOnTableHidden.length >= 5) {
       array = cardsOnTableHidden.slice(0, 3);
@@ -174,7 +189,7 @@ function Game() {
         <div>
           <input
             type="range"
-            min="1"
+            min={minBet()}
             max={maxBet()}
             onChange={onChangeSlider}
           />
