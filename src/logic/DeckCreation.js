@@ -1,6 +1,6 @@
 export class DeckCreation {
-  createNewCard = (cardNumber) => {
-    let cardDeck = ["x"];
+  createNewCard = () => {
+    let cardDeck = [];
     for (let c = 2; c < 15; c++) {
       if (c < 10) {
         cardDeck.push("0" + c + "H");
@@ -14,6 +14,6 @@ export class DeckCreation {
         cardDeck.push(c + "S");
       }
     }
-    return cardDeck[cardNumber];
+    return cardDeck;
   };
 }

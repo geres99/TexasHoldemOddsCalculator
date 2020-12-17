@@ -1,7 +1,7 @@
 import { DeckCreation } from "./DeckCreation";
 
 export class DeckShuffle {
-  DeckShuffle = (playersNumber) => {
+  DeckShuffle = (playersNumber, activePlayers) => {
     let newCard = new DeckCreation();
     let cardsForGame = [];
     let cardsOnTable = [];
@@ -12,7 +12,13 @@ export class DeckShuffle {
       if (myMap.size >= playersNumber * 2 + 5) {
         cardsForPlayer.push(1, cardsForGame.splice(0, 2));
         for (let v = 2; cardsForGame.length !== 0; v++) {
-          cardsForOtherPlayers.push([v, cardsForGame.splice(0, 2)]);
+          let playerSpot = 0;
+          if (activePlayers !== undefined) {
+            playerSpot = activePlayers[v - 2][0];
+          } else {
+            playerSpot = v;
+          }
+          cardsForOtherPlayers.push([playerSpot, cardsForGame.splice(0, 2)]);
         }
         return [cardsOnTable, cardsForOtherPlayers, cardsForPlayer];
       }

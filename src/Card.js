@@ -5,6 +5,7 @@ function Card(props) {
     <img
       src={process.env.PUBLIC_URL + "./Images/" + props.card + ".png"}
       alt={props.card}
+      number={props.myNumber}
       width="50"
     />
   );
