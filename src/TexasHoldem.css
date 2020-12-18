@@ -8,3 +8,20 @@
   flex-direction: column;
   flex-wrap: wrap;
 }
+.centre {
+  display: flex;
+  justify-content: center;
+}
+.spaceequal {
+  display: flex;
+  justify-content: space-evenly;
+}
+.spaceequal > * {
+  margin-top: 50px;
+}
+.player0 {
+  margin-top: 10px;
+}
+.player1 {
+  margin-top: 10px;
+}

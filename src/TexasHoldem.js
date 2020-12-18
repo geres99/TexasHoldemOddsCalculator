@@ -84,7 +84,7 @@ function TexasHoldem() {
     setSpot(TargetNumber);
     resetStyles();
     let x = document.getElementsByClassName("player" + TargetNumber);
-    x[0].style.border = "1px solid blue";
+    x[0].style.border = "1px solid red";
   };
 
   let resetStyles = () => {
@@ -105,27 +105,37 @@ function TexasHoldem() {
           </div>
         ))}
       </div>
-      <div className="row">
-        Win Chance = ~{chance.winChance}% Draw Chance = ~{chance.drawChance}%
-        <div className="row player0">
-          {cardsUsed[0].map((x) => (
-            <div deletingTarget={x} onClick={addCard}>
-              <Card card={x} myNumber={0} />{" "}
-            </div>
-          ))}
-        </div>
-        <div className="row">
-          Win Chance = ~{chance.loseChance}% Draw Chance = ~{chance.drawChance}%
-          <div className="row player1">
-            {cardsUsed[1].map((x) => (
-              <div deletingTarget={x} onClick={addCard}>
-                <Card card={x} myNumber={1} />{" "}
+      <div className="row spaceequal">
+        <div className="centre">
+          <div className="column">
+            <div>Win Chance = ~{chance.winChance}%</div>
+            <div>Draw Chance = ~{chance.drawChance}%</div>
+            <div className="row centre">
+              <div className="row player0">
+                {cardsUsed[0].map((x) => (
+                  <div deletingTarget={x} onClick={addCard}>
+                    <Card card={x} myNumber={0} />{" "}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+          </div>
+        </div>
+        <div className="column">
+          <div>Win Chance = ~{chance.loseChance}%</div>
+          <div>Draw Chance = ~{chance.drawChance}%</div>
+          <div className="row centre">
+            <div className="row player1">
+              {cardsUsed[1].map((x) => (
+                <div deletingTarget={x} onClick={addCard}>
+                  <Card card={x} myNumber={1} />{" "}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-      <div className="row">
+      <div className="row  spaceequal">
         <div className="row player2">
           {cardsUsed[2].map((x) => (
             <div deletingTarget={x} onClick={addCard}>
