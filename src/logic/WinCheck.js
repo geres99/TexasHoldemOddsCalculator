@@ -2,6 +2,7 @@ import { CombinationCheck } from "./CardsCombinationCheck";
 
 export class WinCheck {
   SortCards = (Cards) => {
+    Cards = Cards.sort();
     let cardNumber = [];
     let cardColor = [];
     for (let i = Cards.length - 1; i >= 0; i = i - 1) {
