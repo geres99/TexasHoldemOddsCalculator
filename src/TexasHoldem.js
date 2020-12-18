@@ -98,14 +98,6 @@ function TexasHoldem() {
 
   return (
     <div>
-      <div className="centre">
-        <img
-          className="centre"
-          src={process.env.PUBLIC_URL + "./Images/logo.png"}
-          alt="logo"
-          width="150px"
-        />
-      </div>
       <div className="row">
         {deck.map((x) => (
           <div className={x} deletingTarget={x} onClick={deleteCard}>
@@ -151,6 +143,14 @@ function TexasHoldem() {
             </div>
           ))}
         </div>
+      </div>
+      <div className="centre">
+        <img
+          className="centre"
+          src={process.env.PUBLIC_URL + "./Images/logo.png"}
+          alt="logo"
+          width="250px"
+        />
       </div>
     </div>
   );
