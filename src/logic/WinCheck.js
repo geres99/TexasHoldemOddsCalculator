@@ -46,4 +46,51 @@ export class WinCheck {
       return game.strongestCardCheck(Cards);
     }
   };
+  getWinners = (cardsUsed, deck) => {
+    let player1 = cardsUsed[0].filter((x) => x !== "gray_back");
+    let player2 = cardsUsed[1].filter((x) => x !== "gray_back");
+    if (player1.length >= 2 && player2.length >= 2) {
+      let table = cardsUsed[2].filter((x) => x !== "gray_back");
+      let cardsOnTable = table.concat(player1.concat(player2));
+      let deckLeftovers = deck;
+      for (let i = 0; i < cardsOnTable.length; i++) {
+        deckLeftovers = deckLeftovers.filter((x) => x !== cardsOnTable[i]);
+      }
+      let wins = 0;
+      let draws = 0;
+      let loses = 0;
+      for (let i = 0; i < 5000; i++) {
+        let gameTable = cardsUsed[2].filter((x) => x !== "gray_back");
+        let gameDeck = deckLeftovers;
+        for (let v = 0; v < 5 - table.length; v++) {
+          let randomCard =
+            gameDeck[Math.floor(Math.random() * gameDeck.length)];
+          gameDeck = gameDeck.filter((x) => x !== randomCard);
+          gameTable.push(randomCard);
+        }
+        let pointsOfPlayer1 = player1.concat(gameTable);
+        let pointsOfPlayer2 = player2.concat(gameTable);
+
+        let check = new WinCheck();
+        pointsOfPlayer1 = check.PointsCheck(pointsOfPlayer1);
+        pointsOfPlayer2 = check.PointsCheck(pointsOfPlayer2);
+
+        if (pointsOfPlayer1 > pointsOfPlayer2) {
+          wins++;
+        }
+        if (pointsOfPlayer1 === pointsOfPlayer2) {
+          draws++;
+        }
+        if (pointsOfPlayer1 < pointsOfPlayer2) {
+          loses++;
+        }
+      }
+      let chances = {
+        winChance: (wins * 100) / (wins + draws + loses),
+        loseChance: (loses * 100) / (wins + draws + loses),
+        drawChance: (draws * 100) / (wins + draws + loses),
+      };
+      return chances;
+    }
+  };
 }
