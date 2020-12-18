@@ -1,25 +1,18 @@
 import { CombinationCheck } from "./CardsCombinationCheck";
 
 export class WinCheck {
-  SortCards = (Hand, Table) => {
-    let array = [];
-    let array2 = [];
-    let array3 = [];
-    for (let i = 0; i < Table.length; i++) {
-      array.push(Table[i][0]);
+  SortCards = (Cards) => {
+    let cardNumber = [];
+    let cardColor = [];
+    for (let i = Cards.length - 1; i >= 0; i = i - 1) {
+      cardNumber.push(Cards[i][0] + Cards[i][1]);
+      cardColor.push(Cards[i][2]);
     }
-    Hand = Hand[1].concat(array);
-    Hand = Hand.sort();
-    for (let i = Hand.length - 1; i >= 0; i = i - 1) {
-      array3.push(Hand[i]);
+    let cardsSorted = [];
+    for (let i = 0; i < cardNumber.length; i++) {
+      cardsSorted.push([cardNumber[i], cardColor[i]]);
     }
-    Hand = array3;
-    for (let i = 0; i < Hand.length; i++) {
-      let cardNumber = Hand[i][0] + Hand[i][1];
-      let color = Hand[i][2];
-      array2.push([cardNumber, color]);
-    }
-    return array2;
+    return cardsSorted;
   };
 
   PointsCheck = (Cards) => {

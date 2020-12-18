@@ -5,7 +5,6 @@ import Player from "./Player";
 import Card from "./Card";
 import { WinCheck } from "./logic/WinCheck";
 import { Winners } from "./logic/Winners";
-import { BetingSystemPlayer } from "./logic/BetingSystemPlayer";
 
 function Game() {
   let [inputValue, setInputValue] = React.useState("");
@@ -123,23 +122,6 @@ function Game() {
   };
 
   let showCards = () => {
-    console.log(tokensSpend);
-    let firstMove = BetingSystemPlayer(
-      tokensOnBoard,
-      tokensOfPlayers[0],
-      tokensSpend[0],
-      minBetting,
-      blind,
-      sliderValue
-    );
-    console.log(firstMove);
-    setTokensOnBoard(firstMove[0]);
-    tokensOfPlayers[0] = firstMove[1];
-    setTokensOfPlayers(tokensOfPlayers);
-    tokensSpend[0] = firstMove[2];
-    setTokensSpend(tokensSpend);
-    setMinBetting(minBetting);
-
     let array = [];
     if (cardsOnTableHidden.length >= 5) {
       array = cardsOnTableHidden.slice(0, 3);

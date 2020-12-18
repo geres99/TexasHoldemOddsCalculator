@@ -35,9 +35,11 @@ function TexasHoldem() {
     let player2 = points(cardsUsed[1], cardsUsed[2]);
     if (player1.length >= 5 && player2.length >= 5) {
       let check = new WinCheck();
+      player1 = check.SortCards(player1);
+      player2 = check.SortCards(player2);
       handStrenght[0] = check.PointsCheck(player1);
       handStrenght[1] = check.PointsCheck(player2);
-      console.log(player1);
+      console.log(handStrenght);
       setHandStrength(handStrenght);
     }
   };
