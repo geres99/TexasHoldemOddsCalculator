@@ -12,7 +12,10 @@ function TexasHoldem() {
   ]);
   let [rerender, setRerender] = React.useState();
   let [spot, setSpot] = React.useState("");
-  let [handStrenght, setHandStrength] = React.useState([0, 0]);
+  let [chance, setChance] = React.useState([
+    [0, 0],
+    [0, 0],
+  ]);
 
   let cards = new DeckCreation();
   let deck = cards.createNewCard();
@@ -31,16 +34,59 @@ function TexasHoldem() {
         setRerender(Math.random());
       }
     }
-    let player1 = points(cardsUsed[0], cardsUsed[2]);
-    let player2 = points(cardsUsed[1], cardsUsed[2]);
-    if (player1.length >= 5 && player2.length >= 5) {
-      let check = new WinCheck();
-      player1 = check.SortCards(player1);
-      player2 = check.SortCards(player2);
-      handStrenght[0] = check.PointsCheck(player1);
-      handStrenght[1] = check.PointsCheck(player2);
-      console.log(handStrenght);
-      setHandStrength(handStrenght);
+    // let player1 = points(cardsUsed[0], cardsUsed[2]);
+    let player1 = cardsUsed[0].filter((x) => x !== "gray_back");
+    let player2 = cardsUsed[1].filter((x) => x !== "gray_back");
+    if (player1.length >= 2 && player2.length >= 2) {
+      let table = cardsUsed[2].filter((x) => x !== "gray_back");
+      let cardsOnTable = table.concat(player1.concat(player2));
+      let deckLeftovers = deck;
+      for (let i = 0; i < cardsOnTable.length; i++) {
+        deckLeftovers = deckLeftovers.filter((x) => x !== cardsOnTable[i]);
+      }
+      let wins = 0;
+      let draws = 0;
+      let loses = 0;
+      for (let i = 0; i < 5000; i++) {
+        let gameTable = cardsUsed[2].filter((x) => x !== "gray_back");
+        let gameDeck = deckLeftovers;
+        for (let v = 0; v < 5 - table.length; v++) {
+          let randomCard =
+            gameDeck[Math.floor(Math.random() * gameDeck.length)];
+          gameDeck = gameDeck.filter((x) => x !== randomCard);
+          gameTable.push(randomCard);
+        }
+        let pointsOfPlayer1 = player1.concat(gameTable);
+        let pointsOfPlayer2 = player2.concat(gameTable);
+
+        let check = new WinCheck();
+        pointsOfPlayer1 = check.PointsCheck(pointsOfPlayer1);
+        pointsOfPlayer2 = check.PointsCheck(pointsOfPlayer2);
+
+        if (pointsOfPlayer1 > pointsOfPlayer2) {
+          wins++;
+        }
+        if (pointsOfPlayer1 === pointsOfPlayer2) {
+          draws++;
+        }
+        if (pointsOfPlayer1 < pointsOfPlayer2) {
+          loses++;
+        }
+      }
+      chance[0][0] = ((wins / (wins + draws + loses)) * 100)
+        .toString()
+        .slice(0, 6);
+      chance[0][1] = ((loses / (wins + draws + loses)) * 100)
+        .toString()
+        .slice(0, 6);
+      chance[1][0] = ((draws / (wins + draws + loses)) * 100)
+        .toString()
+        .slice(0, 6);
+      chance[1][1] = ((draws / (wins + draws + loses)) * 100)
+        .toString()
+        .slice(0, 6);
+      setChance(chance);
+      setRerender(Math.random());
     }
   };
   let addCard = (e) => {
@@ -71,12 +117,6 @@ function TexasHoldem() {
     z[0].style.border = "none";
   };
 
-  let points = (Hand, Table) => {
-    let cardsLength = Hand.concat(Table);
-    cardsLength = cardsLength.filter((x) => x !== "gray_back");
-    return cardsLength;
-  };
-
   return (
     <div>
       <div className="row">
@@ -87,6 +127,7 @@ function TexasHoldem() {
         ))}
       </div>
       <div className="row">
+        Win Chance = ~{chance[0][0]}% Draw Chance = ~{chance[1][0]}%
         <div className="row player0">
           {cardsUsed[0].map((x) => (
             <div deletingTarget={x} onClick={addCard}>
@@ -95,6 +136,7 @@ function TexasHoldem() {
           ))}
         </div>
         <div className="row">
+          Win Chance = ~{chance[0][1]}% Draw Chance = ~{chance[1][1]}%
           <div className="row player1">
             {cardsUsed[1].map((x) => (
               <div deletingTarget={x} onClick={addCard}>

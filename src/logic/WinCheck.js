@@ -16,6 +16,7 @@ export class WinCheck {
   };
 
   PointsCheck = (Cards) => {
+    Cards = this.SortCards(Cards);
     let game = new CombinationCheck();
     if (game.straightFlushCheck(Cards) !== undefined) {
       return game.straightFlushCheck(Cards);
