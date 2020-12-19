@@ -20,6 +20,11 @@ function TexasHoldem() {
 
   let cards = new DeckCreation();
   let deck = cards.createNewCard();
+  let freeCardsList = cards.createNewDeck();
+
+  let [freeCards, setFreeCards] = React.useState(freeCardsList);
+
+  console.log(freeCards);
 
   let deleteCard = (e) => {
     if (spot !== "") {
@@ -147,7 +152,7 @@ function TexasHoldem() {
       <div className="centre">
         <img
           className="centre"
-          src={process.env.PUBLIC_URL + "./Images/logo.png"}
+          src={process.env.PUBLIC_URL + "/Images/logo.png"}
           alt="logo"
           width="250px"
         />
