@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/TexasHoldemOdds/static/css/main.81af8fc2.chunk.css",
+    "main.js": "/TexasHoldemOdds/static/js/main.b1a1219f.chunk.js",
+    "main.js.map": "/TexasHoldemOdds/static/js/main.b1a1219f.chunk.js.map",
+    "runtime-main.js": "/TexasHoldemOdds/static/js/runtime-main.a94e5640.js",
+    "runtime-main.js.map": "/TexasHoldemOdds/static/js/runtime-main.a94e5640.js.map",
+    "static/js/2.5cdeef29.chunk.js": "/TexasHoldemOdds/static/js/2.5cdeef29.chunk.js",
+    "static/js/2.5cdeef29.chunk.js.map": "/TexasHoldemOdds/static/js/2.5cdeef29.chunk.js.map",
+    "index.html": "/TexasHoldemOdds/index.html",
+    "precache-manifest.899b1dc435cb0915efbab4150c2c909b.js": "/TexasHoldemOdds/precache-manifest.899b1dc435cb0915efbab4150c2c909b.js",
+    "service-worker.js": "/TexasHoldemOdds/service-worker.js",
+    "static/css/main.81af8fc2.chunk.css.map": "/TexasHoldemOdds/static/css/main.81af8fc2.chunk.css.map",
+    "static/js/2.5cdeef29.chunk.js.LICENSE.txt": "/TexasHoldemOdds/static/js/2.5cdeef29.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a94e5640.js",
+    "static/js/2.5cdeef29.chunk.js",
+    "static/css/main.81af8fc2.chunk.css",
+    "static/js/main.b1a1219f.chunk.js"
+  ]
+}
