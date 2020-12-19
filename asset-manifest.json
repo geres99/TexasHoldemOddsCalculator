@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/TexasHoldemOddsCalculator/static/css/main.81af8fc2.chunk.css",
-    "main.js": "/TexasHoldemOddsCalculator/static/js/main.c7268c6e.chunk.js",
-    "main.js.map": "/TexasHoldemOddsCalculator/static/js/main.c7268c6e.chunk.js.map",
+    "main.css": "/TexasHoldemOddsCalculator/static/css/main.a5393edc.chunk.css",
+    "main.js": "/TexasHoldemOddsCalculator/static/js/main.8a41dd2d.chunk.js",
+    "main.js.map": "/TexasHoldemOddsCalculator/static/js/main.8a41dd2d.chunk.js.map",
     "runtime-main.js": "/TexasHoldemOddsCalculator/static/js/runtime-main.649cd0e8.js",
     "runtime-main.js.map": "/TexasHoldemOddsCalculator/static/js/runtime-main.649cd0e8.js.map",
-    "static/js/2.5cdeef29.chunk.js": "/TexasHoldemOddsCalculator/static/js/2.5cdeef29.chunk.js",
-    "static/js/2.5cdeef29.chunk.js.map": "/TexasHoldemOddsCalculator/static/js/2.5cdeef29.chunk.js.map",
+    "static/js/2.ef27eaba.chunk.js": "/TexasHoldemOddsCalculator/static/js/2.ef27eaba.chunk.js",
+    "static/js/2.ef27eaba.chunk.js.map": "/TexasHoldemOddsCalculator/static/js/2.ef27eaba.chunk.js.map",
     "index.html": "/TexasHoldemOddsCalculator/index.html",
-    "precache-manifest.d5bc039449d52f1d521dbcd3dd2ce57d.js": "/TexasHoldemOddsCalculator/precache-manifest.d5bc039449d52f1d521dbcd3dd2ce57d.js",
+    "precache-manifest.13abd906a4207d14de2c27ceae368f4d.js": "/TexasHoldemOddsCalculator/precache-manifest.13abd906a4207d14de2c27ceae368f4d.js",
     "service-worker.js": "/TexasHoldemOddsCalculator/service-worker.js",
-    "static/css/main.81af8fc2.chunk.css.map": "/TexasHoldemOddsCalculator/static/css/main.81af8fc2.chunk.css.map",
-    "static/js/2.5cdeef29.chunk.js.LICENSE.txt": "/TexasHoldemOddsCalculator/static/js/2.5cdeef29.chunk.js.LICENSE.txt"
+    "static/css/main.a5393edc.chunk.css.map": "/TexasHoldemOddsCalculator/static/css/main.a5393edc.chunk.css.map",
+    "static/js/2.ef27eaba.chunk.js.LICENSE.txt": "/TexasHoldemOddsCalculator/static/js/2.ef27eaba.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.649cd0e8.js",
-    "static/js/2.5cdeef29.chunk.js",
-    "static/css/main.81af8fc2.chunk.css",
-    "static/js/main.c7268c6e.chunk.js"
+    "static/js/2.ef27eaba.chunk.js",
+    "static/css/main.a5393edc.chunk.css",
+    "static/js/main.8a41dd2d.chunk.js"
   ]
 }

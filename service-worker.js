@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/TexasHoldemOddsCalculator/precache-manifest.d5bc039449d52f1d521dbcd3dd2ce57d.js"
+  "/TexasHoldemOddsCalculator/precache-manifest.13abd906a4207d14de2c27ceae368f4d.js"
 );
 
 self.addEventListener('message', (event) => {
