@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/TexasHoldemOddsCalculator/static/css/main.81af8fc2.chunk.css",
-    "main.js": "/TexasHoldemOddsCalculator/static/js/main.d641cb02.chunk.js",
-    "main.js.map": "/TexasHoldemOddsCalculator/static/js/main.d641cb02.chunk.js.map",
+    "main.js": "/TexasHoldemOddsCalculator/static/js/main.c7268c6e.chunk.js",
+    "main.js.map": "/TexasHoldemOddsCalculator/static/js/main.c7268c6e.chunk.js.map",
     "runtime-main.js": "/TexasHoldemOddsCalculator/static/js/runtime-main.649cd0e8.js",
     "runtime-main.js.map": "/TexasHoldemOddsCalculator/static/js/runtime-main.649cd0e8.js.map",
     "static/js/2.5cdeef29.chunk.js": "/TexasHoldemOddsCalculator/static/js/2.5cdeef29.chunk.js",
     "static/js/2.5cdeef29.chunk.js.map": "/TexasHoldemOddsCalculator/static/js/2.5cdeef29.chunk.js.map",
     "index.html": "/TexasHoldemOddsCalculator/index.html",
-    "precache-manifest.dc1223e9f955bcc240c2b2f254ab0dd2.js": "/TexasHoldemOddsCalculator/precache-manifest.dc1223e9f955bcc240c2b2f254ab0dd2.js",
+    "precache-manifest.d5bc039449d52f1d521dbcd3dd2ce57d.js": "/TexasHoldemOddsCalculator/precache-manifest.d5bc039449d52f1d521dbcd3dd2ce57d.js",
     "service-worker.js": "/TexasHoldemOddsCalculator/service-worker.js",
     "static/css/main.81af8fc2.chunk.css.map": "/TexasHoldemOddsCalculator/static/css/main.81af8fc2.chunk.css.map",
     "static/js/2.5cdeef29.chunk.js.LICENSE.txt": "/TexasHoldemOddsCalculator/static/js/2.5cdeef29.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.649cd0e8.js",
     "static/js/2.5cdeef29.chunk.js",
     "static/css/main.81af8fc2.chunk.css",
-    "static/js/main.d641cb02.chunk.js"
+    "static/js/main.c7268c6e.chunk.js"
   ]
 }
