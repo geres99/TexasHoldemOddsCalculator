@@ -23,6 +23,11 @@ function TexasHoldem() {
   let freeCardsList = cards.createNewDeck();
 
   let [freeCards, setFreeCards] = React.useState(freeCardsList);
+  let [borders, setBorders] = React.useState([
+    { border: "noBorder" },
+    { border: "noBorder" },
+    { border: "noBorder" },
+  ]);
 
   console.log(freeCards);
 
@@ -31,8 +36,11 @@ function TexasHoldem() {
       let thisLenght = cardsUsed[spot].length;
       if (cardsUsed[spot][thisLenght - 1] === "gray_back") {
         let myTarget = e.target.attributes[1].nodeValue;
-        let x = document.getElementsByClassName(myTarget);
-        x[0].style.display = "none";
+        freeCards.map((x) => {
+          if (x.card === myTarget) {
+            x.show = "dontShow";
+          }
+        });
         cardsUsed[spot].splice(thisLenght - 1, thisLenght);
         cardsUsed[spot].push(myTarget);
         cardsUsed[spot] = cardsUsed[spot].sort();
@@ -61,8 +69,11 @@ function TexasHoldem() {
     let myTarget = e.target.attributes[1].nodeValue;
     let TargetNumber = Number(e.target.attributes[2].nodeValue);
     if (myTarget !== "gray_back" && TargetNumber === spot) {
-      let x = document.getElementsByClassName(myTarget);
-      x[0].style.display = "block";
+      freeCards.map((x) => {
+        if (x.card === myTarget) {
+          x.show = "show";
+        }
+      });
       cardsUsed[TargetNumber] = cardsUsed[TargetNumber].filter(
         (x) => x !== myTarget
       );
@@ -86,27 +97,21 @@ function TexasHoldem() {
         chance.drawChance = 0;
       }
     }
-    setSpot(TargetNumber);
     resetStyles();
-    let x = document.getElementsByClassName("player" + TargetNumber);
-    x[0].style.border = "1px solid red";
+    borders[TargetNumber].border = "border";
+    setSpot(TargetNumber);
   };
 
   let resetStyles = () => {
-    let x = document.getElementsByClassName("player0");
-    let y = document.getElementsByClassName("player1");
-    let z = document.getElementsByClassName("player2");
-    x[0].style.border = "none";
-    y[0].style.border = "none";
-    z[0].style.border = "none";
+    borders.map((x) => (x.border = "noBorder"));
   };
 
   return (
     <div>
       <div className="row">
-        {deck.map((x) => (
-          <div className={x} deletingTarget={x} onClick={deleteCard}>
-            <Card card={x} />{" "}
+        {freeCards.map((x) => (
+          <div className={x.show} deletingTarget={x.card} onClick={deleteCard}>
+            <Card card={x.card} />{" "}
           </div>
         ))}
       </div>
@@ -116,7 +121,7 @@ function TexasHoldem() {
             <div>Win Chance = ~{chance.winChance}%</div>
             <div>Draw Chance = ~{chance.drawChance}%</div>
             <div className="row centre">
-              <div className="row player0">
+              <div className={"row player0 " + borders[0].border}>
                 {cardsUsed[0].map((x) => (
                   <div deletingTarget={x} onClick={addCard}>
                     <Card card={x} myNumber={0} />{" "}
@@ -130,7 +135,7 @@ function TexasHoldem() {
           <div>Win Chance = ~{chance.loseChance}%</div>
           <div>Draw Chance = ~{chance.drawChance}%</div>
           <div className="row centre">
-            <div className="row player1">
+            <div className={"row player1 " + borders[1].border}>
               {cardsUsed[1].map((x) => (
                 <div deletingTarget={x} onClick={addCard}>
                   <Card card={x} myNumber={1} />{" "}
@@ -141,7 +146,7 @@ function TexasHoldem() {
         </div>
       </div>
       <div className="row  spaceequal">
-        <div className="row player2">
+        <div className={"row player2 " + borders[2].border}>
           {cardsUsed[2].map((x) => (
             <div deletingTarget={x} onClick={addCard}>
               <Card card={x} myNumber={2} />{" "}

@@ -1,3 +1,9 @@
+.dontShow {
+  display: none;
+}
+.border {
+  border: 1px solid red;
+}
 .row {
   display: flex;
   flex-direction: row;
